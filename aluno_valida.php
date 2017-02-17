@@ -19,13 +19,16 @@ if(!$id){
 	
 }else{
 
-	var_dump($id);
-	var_dump($nome);
-	var_dump($email);
+	//var_dump($id);
+	//var_dump($nome);
+	//var_dump($email);
 	$arquivo= array();
-	$fd=fopen("arquivo_aluno","a");
-	fwrite($fd, "$id;$nome;$email\n");
+	$fd=fopen("arquivo_aluno.txt","a");
+	fwrite($fd, "\n$id;$nome;$email");
 	fclose($fd);
+	$mensagem='Cadastro Realizado com Sucesso';
+	header ( "location:/maestro/aluno_lista.php?msg=$mensagem&menu=aluno&formulario=0" );
+	
 	
 }
 
