@@ -22,11 +22,16 @@ switch ($pagina) {
 			include ('coordenador_lista.php');
 			break;
 		}
-	case 'sair' :
+	case 'usuarios' :
 		{
-			include ('sair.php');
+			include ('usuarios_lista.php');
 			break;
 		}
+		case 'sair' :
+			{
+				include ('sair.php');
+				break;
+			}
 	default :
 		{
 			include ('dashboard.php');
