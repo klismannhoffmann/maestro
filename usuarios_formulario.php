@@ -21,17 +21,22 @@ if(!$id)
 			$mensagem['senha'] = 'Preencha a senha';
 		}else{
 			
-			//Abrir a Conexão com o Banco de Dados
-			$link = mysqli_connect ( '127.0.0.1', 'root', '' );
-			$conexao = mysqli_select_db ( $link, 'maestro' );
 			
-			$sql = "insert into usuarios(id,nome,usuario,senha) values($id,'$usuario','@','$senha')";// faz mudanças no banco de dados
-			$resultado= mysqli_query($link,$sql);
+			//Abrir Conexão
+			$link = mysqli_connect('localhost','root','');
+			$conexao = mysqli_select_db($link, 'maestro');
+
+			//Faz o Uso
+			//Inserindo os dados
+			$sql = " insert into usuarios(	id,	nome,usuario,senha)	values(	null,'$usuario','$usuario','$senha')";
+					
+			$resultado = mysqli_query($link, $sql);
+
+			//Fechei a conexao
 			mysqli_close($link);
-			
 			$mensagem['sucesso'] = 'Registro inserido. Você já pode edita-lo.';
 			
-			header('location: usuarios_lista.php?mensagem='.$mensagem['sucesso']);
+			header('location: index.php?pagina=usuarios&mensagem='.$mensagem['sucesso']);
 			
 		}
 
@@ -50,50 +55,46 @@ else
 		}elseif(!$senha){
 			$mensagem['senha'] = 'Preencha a senha';
 		}else{
-
-			//Abrir a Conexão com o Banco de Dados
-			$link = mysqli_connect ( '127.0.0.1', 'root', '' );
-			$conexao = mysqli_select_db ( $link, 'maestro' );
 				
-			$sql = "UPDATE `usuarios`, `nome` = '$usario', `usuario` = '$usuario', `senha` = '$senha' WHERE `usuarios`.`id` = $id;";// faz mudanças no banco de dados
-			$resultado= mysqli_query($link,$sql);
+			//Abrir Conexão
+			$link = mysqli_connect('localhost','root','');
+			$conexao = mysqli_select_db($link, 'maestro');
+
+			//Faz o Uso
+			//Atualizando os dados
+			$sql = "update usuarios	set	usuario = '$usuario',nome = '$usuario',	senha = '$senha' where	id= $id";
+					
+			$resultado = mysqli_query($link, $sql);
+
+			//Fechei a conexao
 			mysqli_close($link);
 				
-			
-				
 			$mensagem['sucesso'] = 'Registro Editado.';
-			header('location: usuarios_lista.php?mensagem='.$mensagem['sucesso']);
+			header('location: index.php?pagina=usuarios&mensagem='.$mensagem['sucesso']);
 				
 		}
 
 	}else{
 		
-		//Busco os dados do banco de dados
-		
-		$dados = array();
-		
-		
 		//Abrir Conexão
 		$link = mysqli_connect('localhost','root','');
 		$conexao = mysqli_select_db($link, 'maestro');
-		
+
 		//Faz o Uso
-		//Atualizando os dados
-		$sql = "
-		select
-		*
-		from
-		usuarios
-		where
-		id_usuario = $id
-		";
-		
+		//Buscar os dados
+		$sql = "select id, usuario, senha, nome from usuarios where	id = $id";
+				
 		$resultado = mysqli_query($link, $sql);
+
+		$row = mysqli_fetch_row($resultado);
 		
-		$row = mysql_affected_rows($resultado);
+		$usuario = $row[1];
+		$senha = $row[2];
 		
-		$usuario = $row['usuario'];
-		$senha = $row['senha'];
+		//Fechei a conexao
+		mysqli_close($link);
+		
+	}
 }
 ?>
 

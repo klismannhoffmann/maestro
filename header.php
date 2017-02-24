@@ -31,7 +31,7 @@
 							href="index.php?pagina=coordenador&formulario=0">Coordenadores</a></li>
 						<li role="presentation"
 							class="<?=(isset($_GET['pagina']) && $_GET['pagina'] == 'usuarios')? 'active':''; ?>"><a
-							href="index.php?pagina=sair">Usuarios</a></li>
+							href="index.php?pagina=usuarios">Usuarios</a></li>
 				
 						<li role="presentation"
 							class="<?=(isset($_GET['pagina']) && $_GET['pagina'] == 'sair')? 'active':''; ?>"><a
